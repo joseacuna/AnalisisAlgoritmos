@@ -25,8 +25,30 @@ int n; int *v;
 
         for(int j=0;j<factor2.num;j++){
 
+            int produc= factor1.vect[i] * factor2.vect[j] +v [i+j];
+            int aux1= produc / 10;
+            int aux2= produc % 10;
+
+            v[i+j]= aux1;
+            v[i+j+1] += aux2;
+
         }
     }
+
+    BIGNUM grande;
+
+    grande.num= 0;
+    grande.vect= v;
+
+    for(int i= n-1;i >=0;i--){
+
+        if(v[i]!=0){
+            grande.num= i+1;
+            break;
+        }
+
+    }
+    return grande;
 }
 
 int main(){
