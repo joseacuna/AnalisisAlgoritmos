@@ -51,6 +51,7 @@ int n; int *v;
     return grande;
 }
 
+BIGNUM grandec(BIGNUM )
 int main(){
 
 string numero;
