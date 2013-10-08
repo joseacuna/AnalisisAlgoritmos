@@ -51,7 +51,50 @@ int n; int *v;
     return grande;
 }
 
-BIGNUM grandec(BIGNUM )
+BIGNUM decendente (BIGNUM nume){ // disminulle el valor de bignum
+    int *v = new int [nume.num];
+    for(int i =0; i< nume.num; i++)
+        v[i]=nume.vect[i];
+
+    if(nume.num ==0){
+    return nume;
+    }
+    else{
+        for(int i=0; i<nume.num;i++){
+        if(v[i]==0){
+        v[i]=9;
+        }else{
+        v[i]--;
+        break;
+        }
+      }
+    }
+
+    BIGNUM deci;
+    deci.num=0;
+    deci.vect=v;
+    for(int i= nume.num-1 ;i>=0;i--){
+        if (v[i]!=0){
+                deci.num=i+1;
+                break;
+        }
+    }
+    return deci;
+}
+
+BIGNUM factorial(BIGNUM numero){
+if (numero.num == 0){
+    BIGNUM uno;
+    uno.num=1;
+    uno.vect=new int [1];
+    uno.vect[0]=1;
+    return uno;
+}else{
+    return producto(numero,factorial(decendente(numero)));
+}
+
+}
+
 int main(){
 
 string numero;
@@ -70,6 +113,12 @@ num.vect= new int [num.num];
 
     for(int i =0; i< num.num;i++)
     {
-        num.vect[i]= (int) numero[num.num-1-i]-48
+        num.vect[i]= (int) numero[num.num-1-i]-48;
+    }
+
+    BIGNUM facto= factorial(numero);
+
+    for(int i= facto.num-1;i>=0;i--){
+        cout << facto.vect[i]<< endl;
     }
 }
