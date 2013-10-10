@@ -1,16 +1,19 @@
 #include <iostream>
 #include <string.h>
 #include <cstdlib>
+#include <cstdio>
 using namespace std;
 
 typedef struct BIGNUM{
 int *vect;
 int num;
 }BIGNUM;
+string a;
 
 BIGNUM producto(BIGNUM factor1,BIGNUM factor2){ // calcula el producto de dos numeros de tipo BIGNUM
 int n; int *v;
-    if (factor1.num > factor2.num){
+
+if (factor1.num > factor2.num){
             n= 2* factor1.num;
 
         }else{
@@ -25,9 +28,9 @@ int n; int *v;
 
         for(int j=0;j<factor2.num;j++){
 
-            int produc= factor1.vect[i] * factor2.vect[j] +v [i+j];
-            int aux1= produc / 10;
-            int aux2= produc % 10;
+            int produc= factor1.vect[i] * factor2.vect[j] + v [i+j];
+            int aux1= produc % 10;
+            int aux2= produc / 10;
 
             v[i+j]= aux1;
             v[i+j+1] += aux2;
@@ -50,6 +53,7 @@ int n; int *v;
     }
     return grande;
 }
+
 
 BIGNUM decendente (BIGNUM nume){ // disminulle el valor de bignum
     int *v = new int [nume.num];
@@ -94,31 +98,28 @@ if (numero.num == 0){
 }
 
 }
+int main() {
+string entrada;
 
-int main(){
+ printf("Ingresar N: ");
+ cin >> entrada;
 
-string numero;
+ BIGNUM numero;
 
-cout<<"ingrese numero; ";
+ numero.num = entrada.size();
+ numero.vect= new int[numero.num];
 
-cin >> numero;
+ for(int i=0; i<numero.num; i++)
+     numero.vect[i] = (int)entrada[numero.num-1-i] - 48; //convierte caracter en cifra
 
-BIGNUM num;
+ BIGNUM calculo = factorial(numero);
 
-num.num= numero.size();
+for(int i=calculo.num-1; i>=0; i--) {
 
-num.vect= new int [num.num];
+  cout<< calculo.vect[i];
+}
 
-// ingresar datos a la  estructura
 
-    for(int i =0; i< num.num;i++)
-    {
-        num.vect[i]= (int) numero[num.num-1-i]-48;
-    }
 
-    BIGNUM facto= factorial(numero);
-
-    for(int i= facto.num-1;i>=0;i--){
-        cout << facto.vect[i]<< endl;
-    }
+ return 0;
 }
